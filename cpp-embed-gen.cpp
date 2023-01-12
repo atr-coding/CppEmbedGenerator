@@ -13,7 +13,7 @@ int main(int argc, char** argv) {
 		ifile = { argv[1] };
 		ofile = { argv[2] };
 	} else {
-		std::cerr << "Incorrect number of arguments.Missing input and/or output file.\n";
+		std::cerr << "Incorrect number of arguments. Missing input and/or output file.\n";
 		return -1;
 	}
 
@@ -53,6 +53,7 @@ int main(int argc, char** argv) {
 	std::ofstream header(ofile);
 	if (header) {
 		header << "#pragma once\n\nnamespace " << ns << " {\n";
+		header << "\tconst unsigned long long " << ifile.stem().string() << "_size { " << data.size() << " };\n";
 		header << "\tconst unsigned char " << ifile.stem().string() << "[" << data.size() << "] = {\n\t\t";
 		header << std::setw(2) << std::setfill('0') << std::hex;
 		std::size_t counter{ 0 };
